@@ -9,9 +9,10 @@
   <meta name="theme-color" content="#f3f1ec">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <!-- Self-hosted (see styles.css @font-face). Preload only the two families used above the fold:
+       body/headline text (Geist) and the headline's italic accent words (Instrument Serif). -->
+  <link rel="preload" href="/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Applies the saved nav-rail state before first paint so the prerendered layout doesn't jump. -->
   <script>try{if(localStorage.getItem('rvnk-rail')==='closed')document.documentElement.dataset.rail='closed'}catch(e){}</script>
 </head>

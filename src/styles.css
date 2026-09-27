@@ -1,3 +1,33 @@
+/* Self-hosted fonts (originally Google Fonts). Each family below is a single variable-weight
+   woff2 — Google serves the same file for every static weight we use, just under separate
+   @font-face blocks, so declaring one `font-weight` range here covers them all from one request.
+   Latin-only: this site has no non-Latin content, so the cyrillic/vietnamese/etc subsets Google
+   also serves are left out. font-display: swap paints text in the fallback font immediately and
+   swaps once the real font arrives, so first paint never waits on a font request. */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/geist-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/geist-mono-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/instrument-serif-italic.woff2') format('woff2');
+}
+
 /* Design tokens ported from the Claude Design export (Claude-portfolio-design/Portfolio.dc.html) */
 :root {
   --paper: #f3f1ec;
