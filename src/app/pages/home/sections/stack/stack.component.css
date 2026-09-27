@@ -1,0 +1,141 @@
+.stack {
+  background: var(--dark-1);
+  color: var(--cream);
+  padding: clamp(80px, 10vw, 140px) var(--gutter);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.head h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(44px, 6.4vw, 110px);
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+}
+
+.head p {
+  margin: 0;
+  max-width: 32ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--cream-dim-2);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+}
+
+.group {
+  display: grid;
+  grid-template-columns: minmax(90px, 120px) 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(236, 233, 227, 0.12);
+}
+
+.group-name {
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  padding-top: 8px;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.item {
+  all: unset;
+  cursor: default;
+  font-size: clamp(20px, 2vw, 28px);
+  letter-spacing: -0.025em;
+  color: var(--cream);
+  transition: color 0.3s;
+}
+
+.item.active {
+  color: var(--accent);
+}
+
+.panel {
+  position: sticky;
+  top: 100px;
+  padding: 28px;
+  border: 1px solid rgba(236, 233, 227, 0.14);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.panel-tech {
+  font-size: clamp(28px, 3vw, 44px);
+  letter-spacing: -0.035em;
+}
+
+.panel-count {
+  font: 400 11px var(--font-mono);
+  color: var(--cream-dim);
+  letter-spacing: 0.06em;
+}
+
+.panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid rgba(236, 233, 227, 0.08);
+  color: #5e5952;
+  transition: color 0.3s;
+  font-size: 16px;
+}
+
+.panel-list li.used {
+  color: var(--cream);
+}
+
+.panel-list .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(236, 233, 227, 0.12);
+  transition: background 0.3s;
+}
+
+.panel-list li.used .dot {
+  background: var(--accent);
+}

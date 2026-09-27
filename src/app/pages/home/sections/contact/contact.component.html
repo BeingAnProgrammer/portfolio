@@ -1,0 +1,60 @@
+<section id="contact" class="contact" data-screen-label="07 Contact">
+  <div class="intro">
+    <span appReveal="fade" class="eyebrow">07 — Contact</span>
+    <h2 appReveal="up">Have a difficult problem worth <span class="italic-serif accent">building?</span></h2>
+    <div appReveal="up" [revealDelay]="120" class="cta-row">
+      <a [href]="'mailto:' + person.email" appMagnetic class="email-cta">Let’s talk — {{ person.email }} <span aria-hidden="true">↗</span></a>
+      <button type="button" (click)="copyEmail()" class="copy-btn">{{ copyLabel() }}</button>
+    </div>
+  </div>
+
+  <div appReveal="up" class="resume-teaser">
+    <div class="teaser-copy">
+      <div class="teaser-meta"><span class="accent">08</span><span>Resume · 2 pages</span></div>
+      <h3>The <span class="italic-serif">paper</span> version.</h3>
+      <p>Everything above, condensed for the hiring loop — roles, projects, stack, certifications and awards.</p>
+      <div class="teaser-actions">
+        <a routerLink="/resume" appMagnetic class="open-resume">Open resume <span aria-hidden="true">→</span></a>
+        <a [href]="resumePdfPath" download class="download-pdf">Download PDF ↓</a>
+      </div>
+    </div>
+
+    <a routerLink="/resume" aria-label="Open resume page" class="teaser-preview">
+      <span class="preview-shadow" aria-hidden="true"></span>
+      <span class="preview-card" aria-hidden="true">
+        <span class="preview-head"><span class="preview-name">R V Nitesh Kumar</span><span class="preview-city">CHENNAI</span></span>
+        <span class="preview-label">SUMMARY</span>
+        <span class="preview-summary">Full Stack Developer with 2.5+ years building scalable web applications with Angular, C#, .NET, Node.js, SQL and Azure.</span>
+        <span class="preview-label">EXPERIENCE</span>
+        <span class="preview-row"><span>Peninsular Research Operation</span><span class="preview-date">03/2024 —</span></span>
+        <span class="bar" style="width: 92%"></span>
+        <span class="bar" style="width: 84%"></span>
+        <span class="bar" style="width: 88%"></span>
+        <span class="preview-row"><span>Focus Research Labs</span><span class="preview-date">2023</span></span>
+        <span class="bar" style="width: 78%"></span>
+      </span>
+    </a>
+  </div>
+
+  <div class="link-grid">
+    <a [href]="person.linkedin.url" target="_blank" rel="noopener" class="link-block"><span class="link-label">LINKEDIN</span><span class="link-value">{{ person.linkedin.handle }} ↗</span></a>
+    <a [href]="person.github.url" target="_blank" rel="noopener" class="link-block"><span class="link-label">GITHUB</span><span class="link-value">{{ person.github.handle }} ↗</span></a>
+    <a [href]="person.medium.url" target="_blank" rel="noopener" class="link-block"><span class="link-label">MEDIUM</span><span class="link-value">{{ person.medium.handle }} ↗</span></a>
+    <a [href]="'mailto:' + person.email" class="link-block"><span class="link-label">EMAIL</span><span class="link-value">{{ person.email }}</span></a>
+  </div>
+
+  <div class="link-grid products">
+    @for (product of products; track product.url) {
+      <a [href]="product.url" target="_blank" rel="noopener" class="link-block">
+        <span class="link-label">{{ product.label }}</span>
+        <span class="link-value">{{ product.name }} ↗</span>
+        <span class="link-sub">{{ product.tagline }}</span>
+      </a>
+    }
+  </div>
+
+  <footer>
+    <div class="footer-id"><span class="footer-name">{{ person.name }}</span><span class="footer-role">{{ person.role }} · Chennai, India</span></div>
+    <a href="#home" class="back-top">BACK TO TOP ↑</a>
+  </footer>
+</section>

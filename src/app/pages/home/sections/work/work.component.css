@@ -1,0 +1,29 @@
+.work {
+  padding: clamp(80px, 12vw, 160px) var(--gutter) 40px;
+  overflow-x: clip;
+}
+
+.work-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: clamp(40px, 6vw, 80px);
+}
+
+.work-head h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(48px, 8vw, 140px);
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.work-head p {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-body);
+}

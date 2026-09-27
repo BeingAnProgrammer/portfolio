@@ -1,0 +1,44 @@
+<section id="stack" class="stack" data-screen-label="05 Stack">
+  <div class="head">
+    <h2 appReveal="up">The <span class="italic-serif">stack,</span> in context</h2>
+    <p appReveal="up" [revealDelay]="100">Tools only matter where they shipped. Hover or focus any technology to see the work it powered.</p>
+  </div>
+
+  <div class="layout">
+    <div class="groups">
+      @for (group of groups; track group.name) {
+        <div appReveal="up" class="group">
+          <span class="group-name">{{ group.name }}</span>
+          <div class="items">
+            @for (item of group.items; track item.name) {
+              <button
+                type="button"
+                (mouseenter)="select(item.name)"
+                (focus)="select(item.name)"
+                (click)="select(item.name)"
+                [class.active]="selected() === item.name"
+                [attr.aria-pressed]="selected() === item.name"
+                class="item"
+              >{{ item.name }}</button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="panel" aria-live="polite">
+      <div class="panel-head">
+        <span class="panel-tech">{{ selected() }}</span>
+        <span class="panel-count">{{ techCount() }}</span>
+      </div>
+      <ul class="panel-list">
+        @for (work of techProjects(); track work.id) {
+          <li [class.used]="work.used">
+            <span>{{ work.name }}</span>
+            <span class="dot"></span>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 14px;
+}
+
+.skip-link:focus-visible {
+  left: 8px;
+}
+
+main {
+  display: block;
+  padding-right: 308px;
+  transition: padding-right 0.6s var(--ease-in);
+}
+
+:host-context(html[data-rail='closed']) main {
+  padding-right: 88px;
+}
+
+app-mobile-nav {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  app-side-rail {
+    display: none;
+  }
+
+  app-mobile-nav {
+    display: contents;
+  }
+
+  main,
+  :host-context(html[data-rail='closed']) main {
+    padding-right: 0;
+    padding-top: 60px;
+  }
+}

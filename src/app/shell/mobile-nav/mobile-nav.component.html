@@ -1,0 +1,42 @@
+<header class="mobile-header">
+  @if (navModel.isResumePage()) {
+    <a routerLink="/" class="brand-mobile">
+      <span class="avatar">RV</span>
+      <span>← Portfolio</span>
+    </a>
+    <a class="pdf-btn" [href]="resumePdfPath" download>PDF ↓</a>
+  } @else {
+    <a href="#home" class="brand-mobile" (click)="closeMenu()">
+      <span class="avatar">RV</span>
+      <span>Nitesh Kumar</span>
+    </a>
+    <button
+      type="button"
+      class="menu-btn"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mnav"
+    >{{ menuOpen() ? 'Close' : 'Menu' }}</button>
+  }
+</header>
+
+@if (!navModel.isResumePage() && menuOpen()) {
+  <nav id="mnav" class="mobile-menu" aria-label="Sections">
+    <ul>
+      @for (item of navModel.items(); track item.id) {
+        <li>
+          @if (item.routerLink) {
+            <a [routerLink]="item.routerLink" [fragment]="item.fragment" (click)="closeMenu()">
+              <span class="num">{{ item.num }}</span>{{ item.label }}
+            </a>
+          } @else {
+            <a [href]="item.href" (click)="closeMenu()">
+              <span class="num">{{ item.num }}</span>{{ item.label }}
+            </a>
+          }
+        </li>
+      }
+    </ul>
+    <span class="availability"><span class="pulse-dot"></span>Available for interesting problems · {{ clock.time() }} IST</span>
+  </nav>
+}

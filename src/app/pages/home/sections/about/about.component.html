@@ -1,0 +1,19 @@
+<section id="about" class="about" data-screen-label="03 About">
+  <h2 appReveal="fade" class="eyebrow">03 — How I work</h2>
+  <p appReveal="up" class="lede">I like working where software meets <span class="italic-serif accent">ambiguity.</span></p>
+
+  <div class="copy-grid">
+    <p appReveal="up">The best problems rarely arrive as tickets. They arrive as a CFO who can’t trust a report, a meeting where nobody remembers who promised what, a state agency with terabytes of satellite imagery and no way to ask it a question.</p>
+    <p appReveal="up" [revealDelay]="100">My job is to sit close to that problem, find the real requirement underneath, design a system that fits it — then build, deploy and keep tuning it with the people who use it. Frontend, backend, data or model: whichever layer the problem lives in.</p>
+  </div>
+
+  <ol class="steps">
+    @for (step of steps; track step.num) {
+      <li appReveal="up" [revealDelay]="$index * 80">
+        <span class="step-num">{{ step.num }}</span>
+        <span class="step-title">{{ step.title }}</span>
+        <span class="step-detail">{{ step.detail }}</span>
+      </li>
+    }
+  </ol>
+</section>

@@ -1,0 +1,54 @@
+<article aria-labelledby="p2t" class="koriva">
+  <div class="meta-row">
+    <span class="meta-left"><span class="num">{{ project().num }}</span><span>AI meeting intelligence &amp; commitments</span></span>
+    <span class="meta-right"><span>Full-stack &amp; AI</span><span>Product</span></span>
+  </div>
+
+  <div class="title-row">
+    <h3 id="p2t" appReveal="up">Koriva</h3>
+    <div class="desc" appReveal="up" [revealDelay]="120">
+      <p>Meetings end; what was promised usually gets lost. Koriva turns conversations from Zoom, Teams and Meet into minutes, commitments and searchable intelligence.</p>
+      <button type="button" (click)="openCaseStudy()" class="case-btn">View case study →</button>
+    </div>
+  </div>
+
+  <div class="demo" (click)="openCaseStudy()" appCursor="Open">
+    <div class="demo-head">
+      <span class="who">
+        <span class="avatar">{{ quote().who }}</span>
+        <span class="who-label">{{ quote().who }} · {{ quote().time }}</span>
+      </span>
+      <span class="badges">
+        <span class="rec"><span class="pulse"></span>Rec</span>
+        <span class="badge">Zoom</span>
+        <span class="badge">Teams</span>
+        <span class="badge">Meet</span>
+      </span>
+    </div>
+
+    <p #quoteEl class="quote">“{{ quote().pre }}<mark>{{ quote().highlight }}</mark>{{ quote().post }}”</p>
+
+    <div class="waveform" aria-hidden="true">
+      <div class="bars-row">
+        @for (bar of bars(); track $index) {
+          <span class="bar" [style.height.%]="bar.heightPct" [style.background]="bar.color"></span>
+        }
+        @for (mark of markLines(); track $index) {
+          <span class="mark-line" [style.left.%]="mark.left" [class.active]="mark.active"></span>
+        }
+        <span class="playhead" [style.left.%]="marks[quoteIndex()]"><span class="playhead-dot"></span></span>
+      </div>
+      <div class="waveform-labels"><span>00:00</span><span>TRANSCRIPT · SPEAKER-ATTRIBUTED</span><span>LIVE</span></div>
+    </div>
+
+    <div class="cards-grid">
+      @for (card of cards(); track $index) {
+        <div class="card" [class.active]="card.active">
+          <span class="tag">{{ card.kind }}</span>
+          <span class="text">{{ card.text }}</span>
+          <span class="meta">{{ card.meta }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</article>

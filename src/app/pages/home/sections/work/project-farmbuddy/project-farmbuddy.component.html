@@ -1,0 +1,76 @@
+<article
+  #canvas
+  aria-labelledby="p4t"
+  class="farmbuddy"
+>
+  <div class="cell-grid" aria-hidden="true">
+    @for (cell of cells(); track $index) {
+      <span [style.background]="cell.bg" [style.opacity]="cell.opacity"></span>
+    }
+  </div>
+
+  <svg aria-hidden="true" viewBox="0 0 32 18" preserveAspectRatio="none" class="polygon-svg">
+    <polygon
+      [attr.points]="svgPoints"
+      fill="rgba(236,233,227,.05)"
+      stroke="#ECE9E3"
+      stroke-width="1.5"
+      stroke-dasharray="6 5"
+      vector-effect="non-scaling-stroke"
+    />
+  </svg>
+
+  @for (vertex of vertices; track $index) {
+    <span aria-hidden="true" class="vertex" [style.left]="vertex.left" [style.top]="vertex.top"></span>
+  }
+
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div #crosshair class="crosshair" aria-hidden="true">
+    <span class="crosshair-ring"></span>
+    <span class="crosshair-h"></span>
+    <span class="crosshair-v"></span>
+    <span #readout class="crosshair-readout"></span>
+  </div>
+
+  <div class="content">
+    <div class="head">
+      <div class="meta-row">
+        <span class="meta-left"><span class="num">{{ project().num }}</span><span>Satellite intelligence · Government of Odisha</span></span>
+        <span class="meta-right"><span>Geospatial APIs &amp; maps</span><span>2024 —</span></span>
+      </div>
+      <ol class="chips">
+        <li class="chip">Sentinel-2 imagery</li><li class="arrow" aria-hidden="true">→</li>
+        <li class="chip">Polygon selection</li><li class="arrow" aria-hidden="true">→</li>
+        <li class="chip">Spatial query</li><li class="arrow" aria-hidden="true">→</li>
+        <li class="chip on">Vegetation intelligence</li>
+      </ol>
+    </div>
+
+    <div class="foot">
+      <div class="foot-left">
+        <h3 id="p4t" appReveal="up">FarmBuddy</h3>
+        <p appReveal="up" [revealDelay]="100">Satellite imagery turned into region-level crop and land intelligence — draw a polygon, query millions of data points, read the vegetation.</p>
+        <button type="button" appMagnetic (click)="openCaseStudy()" class="case-btn">View case study →</button>
+      </div>
+
+      <div class="index-panel" (click)="$event.stopPropagation()">
+        <span class="panel-label">Spectral index</span>
+        <div role="group" aria-label="Spectral index" class="index-grid">
+          @for (index of indices(); track index.name) {
+            <button type="button" [class.on]="index.on" (click)="pickIndex($index, $event)" [attr.aria-pressed]="index.on">
+              <span class="index-name">{{ index.name }}</span>
+              <span class="index-desc">{{ index.desc }}</span>
+            </button>
+          }
+        </div>
+        <span class="legend" [style.background]="legend()"></span>
+        <span class="legend-labels"><span>LOW</span><span>{{ polyCount }} CELLS IN POLYGON</span><span>HIGH</span></span>
+        <span class="query-snippet">
+          <span class="accent">$geoWithin</span>: {{ '{' }} $geometry: Polygon {{ '}' }}<br />
+          <span class="dim">// 2dsphere index</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</article>

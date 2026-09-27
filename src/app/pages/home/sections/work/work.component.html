@@ -1,0 +1,15 @@
+<section id="work" class="work" data-screen-label="02 Work">
+  <div class="work-head">
+    <h2 appReveal="up">Selected <span class="italic-serif">work</span></h2>
+    <p appReveal="up" [revealDelay]="120">
+      Four products I’ve helped ship — from AI agent platforms to satellite analytics. Open any one for the problem, the system and my part in it.
+    </p>
+  </div>
+
+  <app-project-datamocha [project]="agentic" />
+  <app-project-koriva [project]="koriva" />
+  <app-project-anydoc [project]="anydoc" />
+  <app-project-farmbuddy [project]="farmbuddy" />
+
+  <app-minor-projects />
+</section>

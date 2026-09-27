@@ -1,0 +1,150 @@
+<section class="hero">
+  <div class="hero-top">
+    <a routerLink="/" class="back-link">← Back to portfolio</a>
+    <span>08 — Resume · Updated 2026</span>
+  </div>
+  <div class="hero-name-row">
+    <h1 appReveal="up">R V Nitesh <span class="italic-serif">Kumar</span></h1>
+    <div appReveal="up" [revealDelay]="120" class="hero-actions" data-noprint>
+      <a [href]="resumePdfPath" download appMagnetic class="download-btn">Download resume <span aria-hidden="true">↓</span></a>
+      <a [href]="resumePdfPath" target="_blank" rel="noopener" class="view-btn">View PDF ↗</a>
+    </div>
+  </div>
+  <dl appReveal="up" [revealDelay]="200" class="hero-facts">
+    <div><dt>ROLE</dt><dd>Full Stack &amp; AI Engineer</dd></div>
+    <div><dt>EXPERIENCE</dt><dd>2.5+ years</dd></div>
+    <div><dt>BASED</dt><dd>Chennai, India</dd></div>
+    <div><dt>CONTACT</dt><dd><a [href]="'mailto:' + person.email">{{ person.email }}</a></dd></div>
+  </dl>
+</section>
+
+<div class="body" [class.narrow]="layout.isCompact()">
+  <nav aria-label="Resume sections" data-noprint class="toc">
+    <span class="toc-label">CONTENTS</span>
+    @for (item of toc; track item.id) {
+      <a [href]="'#' + item.id" class="toc-link" [class.active]="activeSection.activeId() === item.id">
+        <span class="toc-bar"></span><span>{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <article class="card">
+    <section id="summary" appReveal="up" class="row">
+      <h2>SUMMARY</h2>
+      <p class="summary-text">{{ summary }}</p>
+    </section>
+
+    <section id="experience" class="stack-section">
+      <h2 appReveal="up">EXPERIENCE</h2>
+
+      <div appReveal="up" class="job">
+        <div class="job-head"><h3>Software Development Engineer</h3><span class="job-date">03/2024 — PRESENT</span></div>
+        <span class="job-org">{{ person.employer }} · LBR Tower, Teynampet, Chennai</span>
+
+        <div class="accordion">
+          @for (project of sdeProjects; track project.title; let i = $index) {
+            <div class="accordion-item">
+              <button type="button" (click)="toggle(i)" [attr.aria-expanded]="isExpanded(i)" class="accordion-head">
+                <span class="accordion-n">{{ '0' + (i + 1) }}</span>
+                <span class="accordion-title-block"><span class="accordion-title">{{ project.title }}</span><span class="accordion-sub">{{ project.sub }}</span></span>
+                <span class="accordion-toggle" [class.open]="isExpanded(i)" aria-hidden="true">+</span>
+              </button>
+              @if (isExpanded(i)) {
+                <ul class="accordion-body">
+                  @for (point of project.points; track point) {
+                    <li><span class="dash">—</span><span>{{ point }}</span></li>
+                  }
+                </ul>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      @for (job of otherExperience; track job.title) {
+        <div appReveal="up" class="job job-plain">
+          <div class="job-head"><h3>{{ job.title }}</h3><span class="job-date">{{ job.period }}</span></div>
+          <span class="job-org">{{ job.org }}</span>
+          <ul class="plain-list">
+            @for (point of job.bullets; track point) {
+              <li><span class="dash">—</span><span>{{ point }}</span></li>
+            }
+          </ul>
+        </div>
+      }
+    </section>
+
+    <section id="skills" class="stack-section">
+      <h2 appReveal="up">SKILLS</h2>
+      <div class="skill-grid">
+        @for (group of skills; track group.name) {
+          <div appReveal="up" class="skill-group">
+            <span class="skill-name">{{ group.name }}</span>
+            <ul>
+              @for (item of group.items; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section id="certifications" class="stack-section">
+      <h2 appReveal="up">CERTIFICATIONS</h2>
+      <div class="cert-grid">
+        @for (cert of certifications; track cert.title) {
+          @if (cert.url) {
+            <a appReveal="up" [href]="cert.url" target="_blank" rel="noopener" class="cert cert-link">
+              <span class="cert-top"><span>{{ cert.issuer }}</span><span>{{ cert.date }}</span></span>
+              <span class="cert-bottom"><span class="cert-title">{{ cert.title }}</span><span class="cert-cta">VIEW CREDENTIAL ↗</span></span>
+            </a>
+          } @else {
+            <div appReveal="up" class="cert">
+              <span class="cert-top plain">{{ cert.issuer }}</span>
+              <span class="cert-bottom plain"><span class="cert-title">{{ cert.title }}</span><span class="cert-sub">{{ cert.subtitle }}</span></span>
+            </div>
+          }
+        }
+      </div>
+    </section>
+
+    <section id="awards" class="stack-section">
+      <h2 appReveal="up">HONORS &amp; AWARDS</h2>
+      <div class="award-list">
+        @for (award of awards; track award.title) {
+          <div appReveal="up" class="award-row">
+            @if ($first) {
+              <span class="award-stat">{{ award.tag.replace('×', '') }}<span class="italic-serif accent">×</span></span>
+            } @else {
+              <span class="award-tag">{{ award.tag }}</span>
+            }
+            <span class="award-body"><span class="award-title">{{ award.title }}</span><span class="award-detail">{{ award.detail }}</span></span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section id="education" appReveal="up" class="row education-row">
+      <h2>EDUCATION</h2>
+      <div class="education-body">
+        <span class="edu-degree"><span class="edu-title">{{ education.degree }}</span><span class="edu-school">{{ education.school }}</span></span>
+        <span class="edu-cgpa"><span class="cgpa-value">{{ education.cgpa }}</span><span class="cgpa-label">CGPA</span></span>
+      </div>
+    </section>
+  </article>
+</div>
+
+<section class="cta" data-noprint>
+  <div class="cta-head">
+    <h2 appReveal="up">Take it <span class="italic-serif accent">with you.</span></h2>
+    <div appReveal="up" [revealDelay]="100" class="cta-actions">
+      <a [href]="resumePdfPath" download appMagnetic class="cta-download">Download resume (PDF) <span aria-hidden="true">↓</span></a>
+      <a [href]="'mailto:' + person.email" class="cta-email">Email me ↗</a>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-id"><span class="footer-name">{{ person.name }}</span><span class="footer-role">{{ person.role }} · Chennai, India</span></div>
+    <a routerLink="/" class="back-portfolio">← BACK TO PORTFOLIO</a>
+  </footer>
+</section>

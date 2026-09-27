@@ -1,0 +1,111 @@
+@if (caseStudy.project(); as project) {
+  <div
+    #dialog
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="project.title + ' case study'"
+    class="overlay"
+    [style.--case-accent]="project.accent"
+  >
+    <div class="overlay-head">
+      <span class="head-label"><span class="accent-dot" aria-hidden="true"></span><span class="head-text">Case study {{ project.num }} · {{ project.title }}</span></span>
+      <button #closeButton type="button" (click)="close()" class="close-btn">Close · Esc</button>
+    </div>
+
+    <article class="overlay-body">
+      <div class="tag-row">
+        @if (project.ptype) {
+          <span class="type-badge" [class.company]="project.ptype === 'Company Project'"><span class="type-dot" aria-hidden="true"></span>{{ project.ptype }}</span>
+        }
+        <span class="kind">{{ project.kind }}</span>
+        @if (project.url) {
+          <a [href]="project.url" target="_blank" rel="noopener" class="visit-btn">Visit website <span aria-hidden="true">↗</span></a>
+        }
+      </div>
+
+      <h2>{{ project.title }}</h2>
+      <p class="oneliner">{{ project.oneliner }}</p>
+
+      <dl class="facts">
+        <div><dt>ROLE</dt><dd>{{ project.role }}</dd></div>
+        <div><dt>CONTEXT</dt><dd>{{ project.context }}</dd></div>
+        <div><dt>CORE STACK</dt><dd>{{ project.core }}</dd></div>
+      </dl>
+
+      <div class="problem-product">
+        <section><h3>01 — THE PROBLEM</h3><p>{{ project.problem }}</p></section>
+        <section><h3>02 — THE PRODUCT</h3><p>{{ project.product }}</p></section>
+      </div>
+
+      <section class="my-role">
+        <h3>03 — MY ROLE</h3>
+        <ol>
+          @for (point of project.contrib; track point; let i = $index) {
+            <li><span class="n">{{ pad(i + 1) }}</span><span class="point">{{ point }}</span></li>
+          }
+        </ol>
+      </section>
+
+      <section class="architecture">
+        <div class="arch-head">
+          <h3>04 — ARCHITECTURE</h3>
+          <span class="abstracted"><span class="dot" aria-hidden="true"></span>ABSTRACTED · NO PROPRIETARY DETAIL</span>
+        </div>
+
+        @if (isRowFlow()) {
+          <ol class="arch-list arch-row" [style.grid-template-columns]="'repeat(' + archSteps().length + ', minmax(0,1fr))'">
+            <span class="arch-line" aria-hidden="true"></span>
+            <span #archFill class="arch-fill row" aria-hidden="true"></span>
+            @for (step of archSteps(); track step.title; let i = $index) {
+              <li data-arch-item class="arch-item row">
+                <span class="node" aria-hidden="true"></span>
+                <span class="arch-num">{{ pad(i + 1) }}</span>
+                <span class="arch-title">{{ step.title }}</span>
+                <span class="arch-detail">{{ step.detail }}</span>
+              </li>
+            }
+          </ol>
+        } @else {
+          <ol class="arch-list arch-zig" data-arch-list="zig">
+            <span class="arch-line" aria-hidden="true"></span>
+            <span #archFill class="arch-fill zig" aria-hidden="true"></span>
+            @for (step of archSteps(); track step.title; let i = $index) {
+              <li data-arch-item class="arch-item zig" [class.right]="isNarrow() || i % 2 === 1">
+                <div class="arch-text">
+                  <span class="arch-num">{{ pad(i + 1) }}</span>
+                  <span class="arch-title">{{ step.title }}</span>
+                  <span class="arch-detail">{{ step.detail }}</span>
+                </div>
+                <span class="node-wrap"><span class="node" aria-hidden="true"></span></span>
+              </li>
+            }
+          </ol>
+        }
+      </section>
+
+      <section class="technology">
+        <h3>05 — TECHNOLOGY</h3>
+        <ul class="tech-tags">
+          @for (t of project.tech; track t) {
+            <li>{{ t }}</li>
+          }
+        </ul>
+      </section>
+
+      <section class="outcome">
+        <h3>06 — OUTCOME</h3>
+        <div class="outcome-grid">
+          @for (o of project.outcomes; track o.label) {
+            <div class="outcome-card"><span class="outcome-value">{{ o.value }}</span><span class="outcome-label">{{ o.label }}</span></div>
+          }
+        </div>
+        <p class="note">{{ project.note }}</p>
+      </section>
+
+      <button type="button" (click)="next()" class="next-btn">
+        <span class="next-label">NEXT PROJECT</span>
+        <span class="next-title">{{ caseStudy.nextProject()?.title }} →</span>
+      </button>
+    </article>
+  </div>
+}

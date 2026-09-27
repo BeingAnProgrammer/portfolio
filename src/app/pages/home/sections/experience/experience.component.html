@@ -1,0 +1,58 @@
+<section id="experience" class="experience" data-screen-label="04 Experience">
+  <div class="head">
+    <h2 appReveal="up">Trajectory</h2>
+    <span appReveal="fade" class="eyebrow">04 — Experience</span>
+  </div>
+
+  <div appReveal="up" class="eras">
+    @for (era of eras; track era.label) {
+      <div class="era">
+        <span class="era-period">{{ era.period }}</span>
+        <span class="era-label">{{ era.label }}</span>
+      </div>
+    }
+  </div>
+
+  <div #timelineTrack class="timeline" [class.compact]="layout.isCompact()">
+    <div class="timeline-line" aria-hidden="true"></div>
+    <div #timelineFill class="timeline-fill" aria-hidden="true"></div>
+    <ol>
+      @for (entry of timeline; track entry.title) {
+        <li appReveal="up">
+          <span class="dot" [class]="entry.dotStyle" aria-hidden="true"></span>
+          <div class="entry-meta">
+            <span
+              class="entry-period"
+              [class.current]="entry.current"
+              [class.muted]="entry.dotStyle === 'small'"
+              >{{ entry.period }}</span
+            >
+            <span class="entry-org">{{ entry.org }}</span>
+          </div>
+          @if (entry.dotStyle === 'small') {
+            <div class="entry-body education">
+              <span class="edu-title">{{ entry.title }}</span>
+              <span class="edu-detail">{{ entry.description }}</span>
+            </div>
+          } @else {
+            <div class="entry-body">
+              <h3>{{ entry.title }}</h3>
+              @if (entry.description) {
+                <p>{{ entry.description }}</p>
+              }
+              @if (entry.bullets) {
+                <ul>
+                  @for (bullet of entry.bullets; track bullet) {
+                    <li>
+                      <span class="dash">—</span><span>{{ bullet }}</span>
+                    </li>
+                  }
+                </ul>
+              }
+            </div>
+          }
+        </li>
+      }
+    </ol>
+  </div>
+</section>

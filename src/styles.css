@@ -1,1 +1,170 @@
-/* You can add global styles to this file, and also import other style files */
+/* Design tokens ported from the Claude Design export (Claude-portfolio-design/Portfolio.dc.html) */
+:root {
+  --paper: #f3f1ec;
+  --ink: #151412;
+  --text-body: #3a3732;
+  --text-muted: #67625a;
+  --text-subtle: #8a847b;
+  --accent: #f50;
+
+  --cream: #ece9e3;
+  --cream-dim: #9a948a;
+  --cream-dim-2: #a9a398;
+
+  --panel-1: #e6e2da;
+  --panel-2: #e9e6df;
+  --panel-3: #fbfaf7;
+  --panel-4: #f0ede7;
+  --panel-5: #dfdbd2;
+  --panel-6: #d3cec3;
+
+  --dark-1: #121110;
+  --dark-2: #0e0f0d;
+  --dark-3: #161513;
+
+  --surface-0: #1c1b19;
+  --surface-1: #1f1e1b;
+  --surface-2: #232220;
+  --surface-3: #262522;
+
+  --ease-out: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.2, 1);
+
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --font-serif: 'Instrument Serif', serif;
+
+  --gutter: clamp(20px, 5vw, 72px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Downgraded to auto under prefers-reduced-motion below. Lets every in-page anchor
+     (nav rail, TOC, "back to top") smooth-scroll natively with no JS. */
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* !important: several design buttons use `all: unset`, which would otherwise erase the focus ring. */
+:focus-visible {
+  outline: 2px solid var(--accent) !important;
+  outline-offset: 3px !important;
+  border-radius: 2px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.italic-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+/* Above-the-fold intro animations. Pure CSS so they play from the prerendered HTML's first paint,
+   with no dependence on (or flash during) hydration. Delay via `style="--d: 200ms"`. */
+.reveal-fade,
+.reveal-up,
+.reveal-word {
+  animation: 0.9s var(--ease-out) var(--d, 0ms) both;
+}
+
+.reveal-fade {
+  animation-name: reveal-fade;
+}
+
+.reveal-up {
+  animation-name: reveal-up;
+}
+
+.reveal-word {
+  animation-name: reveal-word;
+  animation-duration: 1s;
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+@keyframes reveal-word {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Accounts for the fixed mobile header when jumping to an in-page anchor. */
+@media (max-width: 900px) {
+  [id] {
+    scroll-margin-top: 60px;
+  }
+}
+
+@media print {
+  aside,
+  header,
+  [data-noprint] {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

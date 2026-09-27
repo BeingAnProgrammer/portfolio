@@ -1,0 +1,83 @@
+<article aria-labelledby="p3t" class="anydoc">
+  <div class="left" [class.sticky]="!layout.isCompact()">
+    <div class="meta-row">
+      <span class="num">{{ project().num }}</span>
+      <span>Client-side document intelligence</span>
+    </div>
+    <h3 id="p3t" appReveal="up">AnyDoc <span class="italic-serif">LLM</span></h3>
+    <p appReveal="up">PDF, DOCX and Excel to clean Markdown — parsed by WebAssembly entirely in the browser, so documents never leave the device.</p>
+
+    <ol aria-label="Workflow" class="steps">
+      @for (step of steps(); track step.label) {
+        <li [class]="step.state">
+          <span class="step-n">0{{ $index + 1 }}</span>
+          <span class="step-label">{{ step.label }}</span>
+          <span class="step-tag">{{ step.tag }}</span>
+        </li>
+      }
+    </ol>
+
+    <div class="cta-row">
+      <button type="button" appMagnetic (click)="openCaseStudy()" class="case-btn">View case study →</button>
+      <span class="tagline">Angular · WASM · local</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div
+      #slider
+      class="slider"
+      [style.aspect-ratio]="layout.isCompact() ? '3/4' : '4/5'"
+      appCursor="Drag"
+      (pointerdown)="onPointerDown($event)"
+      (pointermove)="onPointerMove($event)"
+      (pointerup)="onPointerUp()"
+      (pointercancel)="onPointerUp()"
+    >
+      <div class="pane pane-original" aria-hidden="true" [style.font-size]="layout.isCompact() ? '2.9cqw' : '2.3cqw'">
+        <span class="doc-title">Annual Report</span>
+        <span class="doc-lede">Revenue grew across all three regions, led by new enterprise contracts and a steady renewal base.</span>
+        <span class="doc-h2">Highlights</span>
+        <span class="doc-li"><span>•</span>Structure preserved: headings and lists</span>
+        <span class="doc-li"><span>•</span>Tables converted cleanly</span>
+        <span class="doc-table">
+          <span class="th">Region</span><span class="th">Q1</span><span class="th">Q2</span>
+          <span>North</span><span>1.2</span><span>1.4</span>
+          <span>South</span><span>0.9</span><span>1.1</span>
+        </span>
+        <span class="doc-foot"><span>annual-report.pdf</span><span>4 / 18</span></span>
+      </div>
+
+      <div class="pane pane-markdown" aria-hidden="true" [style.font-size]="layout.isCompact() ? '2.9cqw' : '2.3cqw'" [style.clip-path]="'inset(0 0 0 ' + split() + '%)'">
+        <span class="md-h1"><span class="accent"># </span>Annual Report</span>
+        <span class="md-lede">Revenue grew across all three regions, led by new enterprise contracts and a steady renewal base.</span>
+        <span class="md-h2"><span class="accent">## </span>Highlights</span>
+        <span class="md-li"><span class="accent">- </span>Structure preserved: headings and lists</span>
+        <span class="md-li"><span class="accent">- </span>Tables converted cleanly</span>
+        <span class="md-table">
+          @for (row of markdownTable; track $index) {
+            <span>{{ row }}</span>
+          }
+        </span>
+        <span class="md-foot"><span>annual-report.md</span><span>&lt;!-- p4 --&gt;</span></span>
+      </div>
+
+      <div class="divider" [style.left.%]="split()">
+        <button
+          type="button"
+          role="slider"
+          aria-label="Compare original and Markdown"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [attr.aria-valuenow]="split().toFixed(0)"
+          (keydown)="onHandleKeydown($event)"
+          class="handle"
+        >⟷</button>
+      </div>
+
+      <span class="corner-tag left-tag">Original · PDF</span>
+      <span class="corner-tag right-tag">What the LLM sees · MD</span>
+    </div>
+    <span class="hint">Drag to compare — same page, before and after.</span>
+  </div>
+</article>

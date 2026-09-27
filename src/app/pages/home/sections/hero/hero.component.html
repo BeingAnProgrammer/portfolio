@@ -1,0 +1,59 @@
+<section
+  id="home"
+  #hero
+  class="hero"
+  data-screen-label="01 Home"
+>
+  <div class="grid-static" aria-hidden="true"></div>
+  <div class="grid-follow" aria-hidden="true"></div>
+
+  <div class="topline reveal-fade">
+    <span>R V Nitesh Kumar — Index 2026</span>
+    <span class="tags">
+      <span>AI</span><span>Full Stack</span><span>Data</span><span>Product Engineering</span>
+    </span>
+  </div>
+
+  <div #heroText class="hero-text">
+    <div class="eyebrow reveal-fade" style="--d: 200ms">
+      <span class="rule"></span>Forward Deployed Engineer · Chennai
+    </div>
+    <h1 aria-label="I build software that turns complex problems into usable products.">
+      <span aria-hidden="true" class="word-row">
+        <span class="word-clip"><span class="word reveal-word" style="--d: 250ms">I</span></span>
+        <span class="word-clip"><span class="word reveal-word" style="--d: 310ms">build</span></span>
+        <span class="word-clip"><span class="word reveal-word" style="--d: 370ms">software</span></span>
+        <span class="word-clip"><span class="word reveal-word" style="--d: 430ms">that</span></span>
+        <span class="word-clip"><span class="word reveal-word" style="--d: 490ms">turns</span></span>
+        <span class="word-clip"><span class="word reveal-word muted" style="--d: 550ms">complex</span></span>
+        <span class="word-clip"><span class="word reveal-word muted" style="--d: 610ms">problems</span></span>
+        <span class="word-clip"><span class="word reveal-word" style="--d: 670ms">into</span></span>
+        <span class="word-clip"><span class="word reveal-word italic-serif" style="--d: 730ms">usable</span></span>
+        <span class="word-clip"><span class="word reveal-word italic-serif" style="--d: 790ms">products.</span></span>
+      </span>
+    </h1>
+  </div>
+
+  <div class="hero-meta">
+    <p class="lede reveal-up" style="--d: 900ms">
+      Full-stack engineer working across AI agents, RAG systems, enterprise SaaS, geospatial intelligence and product engineering.
+    </p>
+    <dl class="facts reveal-up" style="--d: 980ms">
+      <dt>Now</dt><dd>Peninsular Research Operation</dd>
+      <dt>Shipping</dt><dd>Agents · RAG · SaaS · Geo</dd>
+      <dt>Since</dt><dd>2023 · 2.5+ years</dd>
+    </dl>
+    <div class="hero-cta reveal-up" style="--d: 1060ms">
+      <a href="#work" appMagnetic class="see-work">See the work <span aria-hidden="true">↓</span></a>
+      <span class="counter">04 FEATURED · 03 EXPERIMENTS</span>
+    </div>
+  </div>
+
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee" [class.paused]="layout.prefersReducedMotion()">
+      @for (item of marqueeLoop; track $index) {
+        <span class="marquee-item">{{ item }}<span class="marquee-dot"></span></span>
+      }
+    </div>
+  </div>
+</section>

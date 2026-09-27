@@ -1,0 +1,44 @@
+<section id="proof" class="proof" data-screen-label="06 Certifications">
+  <div class="head">
+    <h2 appReveal="up">Proof</h2>
+    <span appReveal="fade" class="eyebrow">06 — Certifications &amp; recognition</span>
+  </div>
+
+  <div class="cert-grid">
+    @for (cert of certifications; track cert.title) {
+      @if (cert.url) {
+        <a appReveal="up" [revealDelay]="$index * 80" [href]="cert.url" target="_blank" rel="noopener" class="cert cert-link" [attr.aria-label]="'View ' + cert.title + ' credential on Microsoft Learn'">
+          <div class="cert-top"><span>{{ cert.top[0] }}</span><span>{{ cert.top[1] }}</span></div>
+          <div class="cert-bottom">
+            <span class="cert-kicker">{{ cert.kicker }}</span>
+            <span class="cert-title">{{ cert.title }}</span>
+            <span class="cert-cta">VIEW CREDENTIAL ↗</span>
+          </div>
+        </a>
+      } @else {
+        <article appReveal="up" [revealDelay]="$index * 80" class="cert">
+          <div class="cert-top plain"><span>{{ cert.top[0] }}</span><span>{{ cert.top[1] }}</span></div>
+          <div class="cert-bottom">
+            <span class="cert-kicker plain">{{ cert.kicker }}</span>
+            <span class="cert-title">{{ cert.title }}</span>
+          </div>
+        </article>
+      }
+    }
+  </div>
+
+  <div class="awards-grid">
+    <div appReveal="up" class="award">
+      <span class="stat"><span #excellenceCountEl>{{ excellenceCount() }}</span><span class="italic-serif accent">×</span></span>
+      <span class="award-title">{{ awards[0].title }}</span>
+      <span class="award-detail">{{ awards[0].detail }}</span>
+    </div>
+    @for (award of awards.slice(1); track award.title) {
+      <div appReveal="up" [revealDelay]="80 + $index * 80" class="award align-end">
+        <span class="award-tag">{{ award.tag }}</span>
+        <span class="award-title small">{{ award.title }}</span>
+        <span class="award-detail">{{ award.detail }}</span>
+      </div>
+    }
+  </div>
+</section>

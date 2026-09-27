@@ -1,0 +1,344 @@
+.contact {
+  background: var(--dark-1);
+  color: var(--cream);
+  padding: clamp(96px, 14vw, 200px) var(--gutter) 32px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(64px, 10vw, 140px);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.eyebrow {
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+.intro h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(44px, 7.4vw, 128px);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  max-width: 13ch;
+  text-wrap: balance;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.email-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 64px;
+  padding: 12px 26px;
+  max-width: 100%;
+  flex-wrap: wrap;
+  border-radius: 32px;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: clamp(16px, 1.6vw, 20px);
+  transition: background 0.3s;
+}
+
+.email-cta:hover {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+.copy-btn {
+  height: 64px;
+  padding: 0 24px;
+  border-radius: 32px;
+  border: 1px solid rgba(236, 233, 227, 0.24);
+  background: transparent;
+  color: var(--cream);
+  font: 500 12px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.copy-btn:hover {
+  border-color: var(--cream);
+}
+
+.resume-teaser {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+  padding: clamp(28px, 4vw, 56px);
+  border-radius: 18px;
+  background: var(--panel-1);
+  color: var(--ink);
+  overflow: hidden;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.resume-teaser:hover {
+  transform: translateY(-4px);
+}
+
+.teaser-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.teaser-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #57524b;
+}
+
+.teaser-copy h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 104px);
+  letter-spacing: -0.055em;
+  line-height: 0.88;
+}
+
+.teaser-copy p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--text-body);
+  max-width: 40ch;
+}
+
+.teaser-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.open-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 24px;
+  border-radius: 26px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 15px;
+  transition: background 0.3s;
+}
+
+.open-resume:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.download-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 22px;
+  border-radius: 26px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font: 500 12px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+}
+
+.download-pdf:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.teaser-preview {
+  position: relative;
+  display: block;
+  height: clamp(320px, 34vw, 460px);
+  color: var(--ink);
+}
+
+.preview-shadow {
+  position: absolute;
+  left: 14%;
+  right: 4%;
+  top: 10%;
+  bottom: -30%;
+  rotate: 5deg;
+  background: var(--panel-5);
+  border-radius: 6px;
+}
+
+.preview-card {
+  position: absolute;
+  left: 8%;
+  right: 10%;
+  top: 4%;
+  bottom: -40%;
+  rotate: -3deg;
+  background: var(--panel-3);
+  border-radius: 6px;
+  box-shadow: 0 40px 80px -30px rgba(21, 20, 18, 0.45);
+  padding: clamp(20px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: rotate 0.6s var(--ease-out), translate 0.6s var(--ease-out);
+}
+
+.teaser-preview:hover .preview-card {
+  rotate: -1deg;
+  translate: 0 -10px;
+}
+
+.preview-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  border-bottom: 1.5px solid var(--ink);
+  padding-bottom: 12px;
+}
+
+.preview-name {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 2.6vw, 38px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.preview-city {
+  font: 400 9px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.preview-label {
+  font: 500 9px var(--font-mono);
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.preview-summary {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-body);
+}
+
+.preview-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.preview-date {
+  font: 400 9px var(--font-mono);
+  color: var(--text-muted);
+}
+
+.bar {
+  display: block;
+  height: 5px;
+  background: rgba(21, 20, 18, 0.1);
+  border-radius: 3px;
+}
+
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  border-top: 1px solid rgba(236, 233, 227, 0.14);
+}
+
+.link-grid.products {
+  margin-top: calc(-1 * clamp(64px, 10vw, 140px) + 1px);
+}
+
+.link-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 24px 24px 0;
+  color: var(--cream);
+  transition: padding 0.35s;
+}
+
+.link-block:hover {
+  padding-left: 12px;
+  color: var(--accent);
+}
+
+.link-label {
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--cream-dim);
+}
+
+.link-value {
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.link-sub {
+  font-size: 14px;
+  color: var(--cream-dim);
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(236, 233, 227, 0.14);
+  padding-top: 24px;
+}
+
+.footer-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-name {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.footer-role {
+  font-size: 13px;
+  color: var(--cream-dim);
+}
+
+.back-top {
+  padding: 14px 0;
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--cream-dim);
+}
+
+.back-top:hover {
+  color: var(--cream);
+}

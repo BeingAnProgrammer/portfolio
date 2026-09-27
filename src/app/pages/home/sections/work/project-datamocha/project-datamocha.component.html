@@ -1,0 +1,139 @@
+<!-- Reusable mockup cards, instantiated once per layout (wide = absolutely positioned canvas, compact = stacked). -->
+<ng-template #hubCard>
+  <div class="card hub-card">
+    <span class="card-label">UNIFIED DATA HUB</span>
+    @for (agent of agents(); track agent.name) {
+      <span class="hub-row" [class.active]="agent.active">
+        <span class="hub-dot"></span><span class="hub-name">{{ agent.name }}</span><span class="hub-meta">{{ agent.meta }}</span>
+      </span>
+    }
+    <span class="hub-add">+ Add data source</span>
+  </div>
+</ng-template>
+
+<ng-template #dashboardCard>
+  <div class="card dashboard-card">
+    <div class="dash-head">
+      <span class="dash-title-block">
+        <span class="card-label">INTERACTIVE DASHBOARD</span>
+        <span class="dash-title">Executive overview</span>
+      </span>
+      <span class="dash-filters">
+        <span class="filter on">Finance</span><span class="filter">Sales</span><span class="filter">HR</span>
+      </span>
+    </div>
+    <div class="dash-kpis">
+      <div class="kpi"><span class="kpi-label">Custom KPI · vs plan</span><span class="kpi-value">+8.2%</span></div>
+      <div class="kpi"><span class="kpi-label">Tasks on track</span><span class="kpi-value">142</span></div>
+      <div class="kpi"><span class="kpi-label">Data connection</span><span class="kpi-value kpi-live"><span class="pulse"></span>Real-time</span></div>
+    </div>
+    <div class="dash-chart">
+      <span class="chart-caption"><span>Drill-down · by quarter</span><span class="mono">forecast ┄</span></span>
+      <div class="chart-bars">
+        @for (bar of bars(); track $index) {
+          <span class="chart-bar" [class.forecast]="bar.forecast" [style.height.%]="bar.heightPct"></span>
+        }
+      </div>
+    </div>
+    <div class="ai-insight">
+      <span class="ai-tag">AI INSIGHT</span>
+      <span>Services spend trending above forecast for Q3<span class="blink"></span></span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #reportsCard>
+  <div class="reports-card">
+    <span class="card-label reports-label">REPORTS · GENERATED</span>
+    <div class="report-tile report-tile-1"><span class="mono-label">REPORT · PRINT OPTIONS</span><span>Monthly governance report</span></div>
+    <div class="report-tile report-tile-2"><span class="mono-label">UNIT · FINANCE</span><span class="dim">Tailored KPI summary</span></div>
+    <div class="report-tile report-tile-3"><span class="mono-label">FORECAST</span><span class="dim">Next quarter — by region</span></div>
+  </div>
+</ng-template>
+
+<ng-template #statBadge>
+  <div class="stat-badge">
+    <span class="stat-value">−24%</span>
+    <span class="stat-label">application build size</span>
+    <span class="stat-tag">LAZY LOADING · BUNDLE OPT.</span>
+  </div>
+</ng-template>
+
+<ng-template #governanceCard>
+  <div class="card governance-card">
+    <div class="gov-head">
+      <span class="gov-title-block"><span class="card-label">GOVERNANCE</span><span class="gov-title">Task tracking</span></span>
+      <span class="gov-badge">Tamper-proof</span>
+    </div>
+    <div class="gov-bars">
+      <span class="gov-bar-col">Projects<span class="gov-bar"><span class="gov-bar-fill" style="width: 68%"></span></span></span>
+      <span class="gov-bar-col">Approvals<span class="gov-bar"><span class="gov-bar-fill" style="width: 44%"></span></span></span>
+      <span class="gov-bar-col">Submissions<span class="gov-bar"><span class="gov-bar-fill" style="width: 81%"></span></span></span>
+    </div>
+    <div class="gov-access">
+      <span class="card-label">MULTI-TIER DATA ACCESS</span>
+      <div class="access-row">
+        <span class="access-chip">Organisation</span><span class="access-arrow">›</span>
+        <span class="access-chip active">Unit</span><span class="access-arrow">›</span>
+        <span class="access-chip">Team</span>
+        <span class="rbac">RBAC</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #pipelineCard>
+  <div class="card pipeline-card">
+    <span class="card-label">REAL-TIME DATA FLOW</span>
+    @for (step of pipeline(); track step.label) {
+      <span class="pipe-row" [class.active]="step.active">
+        <span class="pipe-n">{{ step.n }}</span><span class="pipe-label">{{ step.label }}</span
+        ><span class="pipe-dot" [class.on]="step.done"></span>
+      </span>
+    }
+  </div>
+</ng-template>
+
+<article aria-labelledby="p1t" class="datamocha">
+  <div class="meta-row">
+    <span class="meta-left"><span class="num">{{ project().num }}</span><span>Data visualisation &amp; governance platform</span></span>
+    <span class="meta-right"><span>Architect &amp; full-stack</span><span>2024 —</span></span>
+  </div>
+
+  <div class="title-row">
+    <h3 id="p1t" appReveal="up">DataMocha <span class="italic-serif accent">&amp;</span> Agentic AI Studio</h3>
+    <div class="desc" appReveal="up" [revealDelay]="120">
+      <p>An analytics and governance platform that turns data from many sources into interactive dashboards, tailored KPIs, reports and forecasts — with multi-tier access and task tracking for every unit. I architected its configurable core, made it cloud-agnostic and shipped it 24% lighter.</p>
+      <button type="button" (click)="openCaseStudy()" class="case-btn">View case study →</button>
+    </div>
+  </div>
+
+  @if (!compact()) {
+    <div class="wide-scroller">
+      <div class="wide-canvas" (click)="openCaseStudy()" appCursor="Open" aria-hidden="true">
+        <div class="dots-mask" aria-hidden="true"></div>
+
+        <div class="pos hub-pos" data-par="0.05"><ng-container [ngTemplateOutlet]="hubCard" /></div>
+        <div class="pos dashboard-pos" data-par="-0.03"><ng-container [ngTemplateOutlet]="dashboardCard" /></div>
+        <div class="pos reports-pos" data-par="0.09"><ng-container [ngTemplateOutlet]="reportsCard" /></div>
+        <div class="pos governance-pos" data-par="0.1"><ng-container [ngTemplateOutlet]="governanceCard" /></div>
+        <div class="pos stat-pos" data-par="0.15"><ng-container [ngTemplateOutlet]="statBadge" /></div>
+        <div class="pos pipeline-pos" data-par="0.06"><ng-container [ngTemplateOutlet]="pipelineCard" /></div>
+      </div>
+    </div>
+  } @else {
+    <div class="compact-stack" (click)="openCaseStudy()" appCursor="Open" aria-hidden="true">
+      <div class="dots-mask" aria-hidden="true"></div>
+      <div class="compact-dashboard"><ng-container [ngTemplateOutlet]="dashboardCard" /></div>
+      <div class="compact-row">
+        <ng-container [ngTemplateOutlet]="hubCard" />
+        <div class="compact-reports"><ng-container [ngTemplateOutlet]="reportsCard" /></div>
+      </div>
+      <div class="compact-overlap">
+        <ng-container [ngTemplateOutlet]="governanceCard" />
+        <div class="compact-stat"><ng-container [ngTemplateOutlet]="statBadge" /></div>
+      </div>
+      <ng-container [ngTemplateOutlet]="pipelineCard" />
+    </div>
+  }
+</article>

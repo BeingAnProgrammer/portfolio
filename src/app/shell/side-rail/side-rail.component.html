@@ -1,0 +1,110 @@
+<ng-template #navLink let-item let-pill="pill">
+  @if (item.routerLink) {
+    <a
+      [routerLink]="item.routerLink"
+      [fragment]="item.fragment"
+      [class]="pill ? 'pill' : 'nav-link'"
+      [class.on]="item.current"
+      [attr.aria-current]="item.current ? 'page' : null"
+      [attr.aria-label]="pill ? item.label : null"
+      [attr.title]="pill ? item.label : null"
+    >
+      <ng-container [ngTemplateOutlet]="linkBody" [ngTemplateOutletContext]="{ $implicit: item, pill }" />
+    </a>
+  } @else {
+    <a
+      [href]="item.href"
+      [class]="pill ? 'pill' : 'nav-link'"
+      [class.on]="item.current"
+      [attr.aria-current]="item.current ? 'true' : null"
+      [attr.aria-label]="pill ? item.label : null"
+      [attr.title]="pill ? item.label : null"
+    >
+      <ng-container [ngTemplateOutlet]="linkBody" [ngTemplateOutletContext]="{ $implicit: item, pill }" />
+    </a>
+  }
+</ng-template>
+
+<ng-template #linkBody let-item let-pill="pill">
+  @if (pill) {
+    {{ item.num }}
+  } @else {
+    <span class="num">{{ item.num }}</span><span class="label">{{ item.label }}</span><span class="dot"></span>
+  }
+</ng-template>
+
+<aside class="rail" [class.short]="layout.isShort()" aria-label="Site navigation">
+  <div #expandedPanel class="rail-panel expanded-panel">
+    <div class="rail-head">
+      @if (navModel.isResumePage()) {
+        <a routerLink="/" class="brand">
+          <span class="avatar">RV</span>
+          <span class="brand-text"><span class="brand-name">{{ person.name }}</span><span class="brand-role">{{ person.role }}</span></span>
+        </a>
+      } @else {
+        <a href="#home" class="brand">
+          <span class="avatar">RV</span>
+          <span class="brand-text"><span class="brand-name">{{ person.name }}</span><span class="brand-role">{{ person.role }}</span></span>
+        </a>
+      }
+      <button type="button" class="rail-toggle" (click)="toggle()" aria-label="Collapse navigation" aria-expanded="true" title="Collapse  ]">→</button>
+    </div>
+
+    <div class="rail-status">
+      <span class="availability"><span class="status-dot" [class.pulse]="!navModel.isResumePage()"></span>Available for interesting problems</span>
+      @if (navModel.isResumePage()) {
+        <a class="cta" [href]="resumePdfPath" download="R_V_Nitesh_Kumar_Resume.pdf" appMagnetic>Download resume <span aria-hidden="true">↓</span></a>
+      } @else {
+        <a class="cta" href="#contact" appMagnetic>Start a conversation <span aria-hidden="true">↗</span></a>
+      }
+    </div>
+
+    <nav class="rail-nav" aria-label="Sections">
+      <ul>
+        @for (item of navModel.items(); track item.id) {
+          <li><ng-container [ngTemplateOutlet]="navLink" [ngTemplateOutletContext]="{ $implicit: item, pill: false }" /></li>
+        }
+      </ul>
+    </nav>
+
+    <div class="rail-foot">
+      @if (!navModel.isResumePage()) {
+        <div class="foot-block"><span class="foot-label">(MAIL)</span><a [href]="'mailto:' + person.email">{{ person.email }}</a></div>
+        <div class="foot-block"><span class="foot-label">(BASED)</span><span>Chennai · {{ clock.time() }} IST</span></div>
+      }
+      <div class="foot-social">
+        <a [href]="person.linkedin.url" target="_blank" rel="noopener">LinkedIn</a>
+        <a [href]="person.github.url" target="_blank" rel="noopener">GitHub</a>
+        <a [href]="person.medium.url" target="_blank" rel="noopener">Medium</a>
+      </div>
+    </div>
+  </div>
+
+  <div #collapsedPanel class="rail-panel collapsed-panel">
+    <div class="collapsed-top">
+      @if (navModel.isResumePage()) {
+        <a routerLink="/" class="avatar-link" aria-label="Home">RV</a>
+      } @else {
+        <a href="#home" class="avatar-link" aria-label="Home">RV</a>
+      }
+      <button type="button" class="rail-toggle" (click)="toggle()" aria-label="Expand navigation" aria-expanded="false" title="Expand  ]">←</button>
+    </div>
+
+    <nav aria-label="Sections">
+      <ul class="pill-nav">
+        @for (item of navModel.items(); track item.id) {
+          <li><ng-container [ngTemplateOutlet]="navLink" [ngTemplateOutletContext]="{ $implicit: item, pill: true }" /></li>
+        }
+      </ul>
+    </nav>
+
+    <div class="collapsed-bottom">
+      <span class="active-label">{{ activeLabel() }}</span>
+      @if (navModel.isResumePage()) {
+        <a class="cta-dot download" [href]="resumePdfPath" download="R_V_Nitesh_Kumar_Resume.pdf" aria-label="Download resume" title="Download resume">↓</a>
+      } @else {
+        <a class="cta-dot" href="#contact" aria-label="Available — contact" title="Available for interesting problems"><span class="status-dot"></span></a>
+      }
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,18 @@
+<div class="minor">
+  <div class="minor-head" appReveal="up">
+    <h3>Also built <span class="italic-serif">— smaller, sharper</span></h3>
+    <span class="minor-tag">Open source · Tooling · Independent</span>
+  </div>
+  <ul class="minor-list" [class.compact]="layout.isCompact()">
+    @for (project of projects; track project.id) {
+      <li appReveal="up">
+        <button type="button" appCursor="Open" (click)="open(project.id)" class="minor-row">
+          <span class="num">{{ project.num }}</span>
+          <span class="title">{{ project.title }}</span>
+          <span class="line">{{ project.line }}</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </button>
+      </li>
+    }
+  </ul>
+</div>
